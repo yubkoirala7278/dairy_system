@@ -1,0 +1,113 @@
+
+  
+/* Custom horizontal overflow styling */
+.custom-overflow-x {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    /* Smooth scrolling for mobile devices */
+    scrollbar-width: thin;
+    /* Firefox: thin scrollbar */
+    scrollbar-color: #d1d7e0 #f4f6f8;
+    /* Firefox: scrollbar thumb and track color */
+}
+
+/* Scrollbar styling for WebKit browsers (Chrome, Safari) */
+.custom-overflow-x::-webkit-scrollbar {
+    height: 8px;
+    /* Set height for horizontal scrollbar */
+}
+
+.custom-overflow-x::-webkit-scrollbar-track {
+    background: #f4f6f8;
+    /* Scrollbar track color */
+}
+
+.custom-overflow-x::-webkit-scrollbar-thumb {
+    background-color: #d1d7e0;
+    /* Scrollbar thumb color */
+    border-radius: 10px;
+    border: 2px solid #f4f6f8;
+    /* Optional: add padding around thumb */
+}
+
+.custom-overflow-x::-webkit-scrollbar-thumb:hover {
+    background-color: #b0bac8;
+    /* Darker on hover */
+}
+
+.input-group-append .btn {
+    background-color: #f8f9fa;
+    /* Light background for contrast */
+    border: 1px solid #ced4da;
+    /* Standard border */
+    border-radius: 0 0.25rem 0.25rem 0;
+    /* Rounded corners for the right side */
+    transition: background-color 0.3s ease;
+    /* Smooth transition for hover effect */
+}
+
+.input-group-append .btn:hover {
+    background-color: #e2e6ea;
+    /* Change background on hover */
+    border-color: #adb5bd;
+    /* Change border color on hover */
+}
+
+.input-group-append .btn:focus {
+    outline: none;
+    /* Remove outline on focus */
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    /* Add a subtle focus shadow */
+}
+
+.input-group-append .btn i {
+    color: #495057;
+    /* Eye icon color */
+    font-size: 1.2rem;
+    /* Slightly increase icon size */
+}
+.custom-confirm-button {
+    background-color: #c0392b;  /* Deep red color for the button */
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+}
+.custom-confirm-button:hover {
+    background-color: #a93226;  /* Slightly darker shade on hover */
+}
+/* Custom popup styling */
+.swal-custom-popup {
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px;       /* Extra padding */
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
+
+/* Custom title styling */
+.swal-custom-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+/* Custom confirm button styling */
+.swal-custom-button {
+    font-size: 1rem;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+/* Adding a subtle icon animation */
+.swal-animate-icon {
+    animation: bounce 1s ease-in-out infinite;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
