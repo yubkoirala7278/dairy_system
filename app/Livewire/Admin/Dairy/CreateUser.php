@@ -81,14 +81,9 @@ class CreateUser extends Component
         return Excel::download(new UsersExport($users), 'users.xlsx');
     }
 
-
-
     protected $rules = [
         'name' => 'required',
-        'owner_name' => 'required',
-        'password' => 'required|confirmed|min:6',
-        'password_confirmation' => 'required',
-        'farmer_number' => 'required|integer|min:1|unique:users,farmer_number',
+        'farmer_number' => 'required|min:1|unique:users,farmer_number',
         'location' => 'required',
         'gender' => 'required',
         'status' => 'nullable',
@@ -98,17 +93,11 @@ class CreateUser extends Component
     ];
     protected $messages = [
         'name.required' => 'कृषकको नाम अनिवार्य छ।',
-        'owner_name.required' => 'हकवाला व्यक्तिको नाम अनिवार्य छ।',
-        'password.required' => 'पासवर्ड अनिवार्य छ।',
-        'password.confirmed' => 'पासवर्ड पुष्टि गर्नुहोस्।',
-        'password.min' => 'पासवर्डमा कम्तीमा 6 अक्षर हुनु पर्छ।',
-        'password_confirmation.required' => 'पासवर्ड पुष्टि गर्नुहोस् अनिवार्य छ।',
         'farmer_number.required' => 'कृषक नम्बर अनिवार्य छ।',
         'farmer_number.unique' => 'यो कृषक नम्बर पहिल्यै प्रयोग गरिएको छ।',
         'farmer_number.min' => 'ऋणात्मक नम्बर स्वीकृत छैन।',
         'location.required' => 'स्थान अनिवार्य छ।',
         'gender.required' => 'लिङ्ग अनिवार्य छ।',
-        'status.required' => 'स्थिति अनिवार्य छ।',
         'phone_number.required' => 'फोन नम्बर अनिवार्य छ।',
     ];
 
@@ -116,12 +105,9 @@ class CreateUser extends Component
     {
         $this->reset([
             'name',
-            'owner_name',
-            'password',
             'farmer_number',
             'location',
             'gender',
-            'status',
             'phone_number',
             'pan_number',
             'vat_number',
@@ -162,12 +148,11 @@ class CreateUser extends Component
         try {
             $user = User::create([
                 'name' => $this->name,
-                'owner_name' => $this->owner_name,
-                'password' => Hash::make($this->password),
+                'owner_name' => $this->name,
+                'password' => 'password',
                 'farmer_number' =>  $this->convertToNepali($this->farmer_number),
                 'location' => $this->location,
                 'gender' => $this->gender,
-                // 'status' => $this->status,
                 'phone_number' => $this->phone_number,
                 'pan_number' => $this->convertToNepali($this->pan_number),
                 'vat_number' => $this->convertToNepali($this->vat_number),

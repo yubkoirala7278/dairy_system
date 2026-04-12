@@ -23,20 +23,11 @@
 
                 <div class="form-group">
                     <label for="farmer_number" class="form-label h4 font-weight-bold">कृषकको नम्बर</label>
-                    <input type="number" class="form-control translate-nepali" id="farmer_number"
+                    <input type="text" class="form-control translate-nepali" id="farmer_number"
                         wire:model="farmer_number" title="कृपया नम्बर प्रविष्ट गर्नुहोस्" inputmode="numeric"
                         placeholder="कृषकको नम्बर लेख्नुहोस्">
 
                     @error('farmer_number')
-                        <span style="color: #ff8591 !important">{{ $message }}</span>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="owner_name" class="form-label h4 font-weight-bold">हकवाला व्यक्तिको नाम</label>
-                    <input type="text" class="form-control translate-nepali" id="owner_name" wire:model="owner_name"
-                        placeholder="हकवाला व्यक्तिको नाम लेख्नुहोस्">
-
-                    @error('owner_name')
                         <span style="color: #ff8591 !important">{{ $message }}</span>
                     @enderror
                 </div>
@@ -46,59 +37,6 @@
                         placeholder="फोन नम्बर लेख्नुहोस्">
 
                     @error('phone_number')
-                        <span style="color: #ff8591 !important">{{ $message }}</span>
-                    @enderror
-                </div>
-                {{-- <div class="form-group">
-                    <label for="pan_number" class="form-label h4 font-weight-bold">पान नम्बर (वैकल्पिक)</label>
-                    <input type="number" class="form-control translate-nepali" id="pan_number" wire:model="pan_number"
-                        placeholder="पान नम्बर लेख्नुहोस्">
-
-                    @error('pan_number')
-                        <span style="color: #ff8591 !important">{{ $message }}</span>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label for="vat_number" class="form-label h4 font-weight-bold">भ्याट नम्बर (वैकल्पिक)</label>
-                    <input type="number" class="form-control translate-nepali" id="vat_number" wire:model="vat_number"
-                        placeholder="भ्याट नम्बर लेख्नुहोस्">
-
-                    @error('vat_number')
-                        <span style="color: #ff8591 !important">{{ $message }}</span>
-                    @enderror
-                </div> --}}
-                <div class="form-group">
-                    <label for="password" class="form-label h4 font-weight-bold">पासवर्ड</label>
-                    <div class="input-group">
-                        <input type="password" class="form-control" id="password" wire:model="password"
-                            placeholder="पासवर्ड लेख्नुहोस्">
-                        <div class="input-group-append">
-                            <button type="button" class="btn btn-outline-secondary toggle-password"
-                                data-target="#password">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                        </div>
-                    </div>
-                    @error('password')
-                        <span style="color: #ff8591 !important">{{ $message }}</span>
-                    @enderror
-                </div>
-
-
-                <div class="form-group">
-                    <label for="password_confirmation" class="form-label h4 font-weight-bold">पासवर्ड पुष्ट
-                        गर्नुहोस्</label>
-                    <div class="input-group">
-                        <input type="password" class="form-control" id="password_confirmation"
-                            wire:model="password_confirmation" placeholder="पासवर्ड पुनः लेख्नुहोस्">
-                        <div class="input-group-append">
-                            <button type="button" class="btn btn-outline-secondary toggle-password"
-                                data-target="#password_confirmation">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                        </div>
-                    </div>
-                    @error('password_confirmation')
                         <span style="color: #ff8591 !important">{{ $message }}</span>
                     @enderror
                 </div>
@@ -114,16 +52,6 @@
                         <span style="color: #ff8591 !important">{{ $message }}</span>
                     @enderror
                 </div>
-                {{-- <div class="form-group">
-                    <label for="status" class="form-label h4 font-weight-bold">अवस्था</label>
-                    <select class="form-control" wire:model="status" id="status">
-                        <option value="चालू">चालू</option>
-                        <option value="बन्द">बन्द</option>
-                    </select>
-                    @error('status')
-                        <span style="color: #ff8591 !important">{{ $message }}</span>
-                    @enderror
-                </div> --}}
 
                 <button class="btn btn-success" wire:click.prevent="register" style="font-size: 19px">पेश
                     गर्नुहोस्</button>
@@ -161,7 +89,7 @@
                             PDF
                         </button>
                         <button type="button" class="btn btn-secondary px-3 btn-flex" style="border-radius: 30px;"
-                            wire:click="exportToExcel" >Excel</button>
+                            wire:click="exportToExcel">Excel</button>
                     </div>
                 </div>
             </div>
@@ -193,19 +121,22 @@
                                     </span>
                                 </td>
                                 <td class="d-flex gap-2 align-items-center">
-                                        <button class="btn btn-warning shadow-sm text-dark  rounded-1 d-flex justify-content-center align-items-center" data-toggle="tooltip"
-                                            data-placement="top" title="सुधार्नुहोस्"
-                                            wire:click="edit({{ $user->id }})" style="height: 20px;width:20px">
-                                            <i class="fa-solid fa-pencil fs-6"></i>
-                                        </button>
+                                    <button
+                                        class="btn btn-warning shadow-sm text-dark  rounded-1 d-flex justify-content-center align-items-center"
+                                        data-toggle="tooltip" data-placement="top" title="सुधार्नुहोस्"
+                                        wire:click="edit({{ $user->id }})" style="height: 20px;width:20px">
+                                        <i class="fa-solid fa-pencil fs-6"></i>
+                                    </button>
 
-                                        <button class="btn btn-dark shadow-sm text-white  rounded-1 d-flex justify-content-center align-items-center"
-                                            onclick="confirmChangeStatus({{ $user->id }})" data-toggle="tooltip"
-                                            data-placement="top" title="स्थिति परिवर्तन गर्नुहोस्" style="height: 20px;width:20px">
-                                            <i class="fa-solid fa-toggle-on fs-5"></i>
-                                        </button>
+                                    <button
+                                        class="btn btn-dark shadow-sm text-white  rounded-1 d-flex justify-content-center align-items-center"
+                                        onclick="confirmChangeStatus({{ $user->id }})" data-toggle="tooltip"
+                                        data-placement="top" title="स्थिति परिवर्तन गर्नुहोस्"
+                                        style="height: 20px;width:20px">
+                                        <i class="fa-solid fa-toggle-on fs-5"></i>
+                                    </button>
 
-                                        {{-- <button class="btn btn-sm btn-transparent py-0 px-1"
+                                    {{-- <button class="btn btn-sm btn-transparent py-0 px-1"
                                         onclick="confirmDelete({{ $user->id }})" data-toggle="tooltip"
                                         data-placement="top" title="मेटाउनुहोस्">
                                         <i class="fa-solid fa-trash fs-5 text-danger"></i>
