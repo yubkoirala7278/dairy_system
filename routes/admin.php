@@ -18,8 +18,6 @@ use App\Livewire\Admin\Pdf\MilkReport as PdfMilkReport;
 use App\Livewire\Admin\Pdf\PrintUsers;
 use App\Livewire\Admin\Pdf\Transaction as PdfTransaction;
 use App\Livewire\Admin\Pdf\WithdrawTransaction as PdfWithdrawTransaction;
-use App\Livewire\Admin\Product\Order;
-use App\Livewire\Admin\Product\Product;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/home', Home::class)->name('home');
@@ -27,8 +25,6 @@ Route::get('/farmer/create', CreateUser::class)->name('farmer.create');
 Route::get('/farmer/milk/deposit', MilkDeposit::class)->name('farmer.milk.deposit');
 Route::get('/setup', Setup::class)->name('setup');
 Route::get('/milk-deposit-report',MilkReport::class)->name('milk.deposit.report');
-Route::get('/product',Product::class)->name('product');
-Route::get('/orders',Order::class)->name('order');
 Route::get('/transaction',Transaction::class)->name('transaction');
 Route::get('/deposit-transaction',DepositTransaction::class)->name('deposit.transaction');
 Route::get('/milk-deposit-income',Accounting::class)->name('accounting');

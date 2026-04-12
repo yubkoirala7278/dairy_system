@@ -57,15 +57,6 @@
                             ड्यासबोर्ड
                         </a>
                     </li>
-                    <li class="nav-item {{ $page == 'product' ? 'active' : '' }}">
-                        <a href="" class="nav-link with-sub" id="farmer-link">
-                            <i class="typcn typcn-shopping-cart"></i> प्रोडक्ट
-                        </a>
-                        <nav class="az-menu-sub">
-                            <a href="{{ route('admin.product') }}" class="nav-link" id="deposit-milk-link">प्रोडक्ट</a>
-                            <a href="{{ route('admin.order') }}" class="nav-link" id="create-farmer-link">अर्डरहरू</a>
-                        </nav>
-                    </li>
 
                     <li class="nav-item {{ $page == 'farmer' ? 'active' : '' }}">
                         <a href="" class="nav-link with-sub" id="farmer-link">
@@ -95,7 +86,6 @@
                                 id="deposit-milk-link">निक्षेप</a>
                             <a href="{{ route('admin.withdraw.transaction') }}" class="nav-link"
                                 id="create-farmer-link">निकासी</a>
-                            <a href="" class="nav-link" id="setup-link">सेटअप</a>
                         </nav>
                     </li>
                     <li class="nav-item {{ $page == 'members' ? 'active' : '' }}">

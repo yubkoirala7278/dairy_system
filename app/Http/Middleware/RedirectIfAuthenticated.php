@@ -19,9 +19,6 @@ class RedirectIfAuthenticated
     {
         if (Auth::check()) {
             $user = Auth::user();
-            if ($user->hasRole('farmer')) {
-                return redirect()->route('frontend.home');
-            }
 
             if ($user->hasAnyRole(['dairy_manager', 'financial_manager', 'admin'])) {
                 return redirect()->route('admin.home');

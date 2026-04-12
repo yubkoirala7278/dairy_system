@@ -16,10 +16,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RoleSeeder::class,
             AdminSeeder::class,
-            InterestRateSeeder::class,
             // factory
-            UserSeeder::class,
-            MilkDepositSeeder::class
+            // UserSeeder::class,
+            // MilkDepositSeeder::class
         ]);
     }
 }

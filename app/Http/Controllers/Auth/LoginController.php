@@ -65,10 +65,6 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, $user)
     {
-        if ($user->hasRole('farmer')) {
-            return redirect()->route('frontend.home');
-        }
-
         if ($user->hasAnyRole(['admin', 'dairy_manager', 'financial_manager'])) {
             return redirect()->route('admin.home');
         }
