@@ -38,6 +38,8 @@ class MilkDeposit extends Component
     public $search = '';
     public $milk_deposit_id;
     public $user_id;
+    public $sortBy = null;
+    public $sortDirection = 'asc';
 
     public function resetFields()
     {
@@ -112,9 +114,19 @@ class MilkDeposit extends Component
     {
         $this->total_milk_price = round((float)$this->milkQuantity * $this->per_litre_price, 4);
     }
+    public function sort($column)
+    {
+        if ($this->sortBy === $column) {
+            $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
+        } else {
+            $this->sortBy = $column;
+            $this->sortDirection = 'asc';
+        }
+    }
+
     public function render()
     {
-        $milkDeposits = $this->userRepository->getMilkDeposits($this->entries, $this->search, $this->milk_deposit_date, $this->milk_deposit_time, $this->milk_type);
+        $milkDeposits = $this->userRepository->getMilkDeposits($this->entries, $this->search, $this->milk_deposit_date, $this->milk_deposit_time, $this->milk_type, null, $this->sortBy, $this->sortDirection);
         $milkInfo = $this->userRepository->getTotalIncomeFromMilkOnSpecificDate($this->milk_deposit_date, $this->milk_deposit_time, $this->entries, $this->search);
         $totalDepositIncome = NumberHelper::toNepaliNumber($milkInfo['totalDepositIncome']);
         $totalDepositedMilk = NumberHelper::toNepaliNumber($milkInfo['totalDepositedMilk']);

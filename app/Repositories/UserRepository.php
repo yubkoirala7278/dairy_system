@@ -42,7 +42,7 @@ class UserRepository implements UserRepositoryInterface
     }
 
     // ============get milk deposits =================
-    public function getMilkDeposits($entries = 10, $search = null, $milk_deposit_date = null, $milk_deposit_time = null, $milk_type = null, $is_pdf = null)
+    public function getMilkDeposits($entries = 10, $search = null, $milk_deposit_date = null, $milk_deposit_time = null, $milk_type = null, $is_pdf = null, $sortBy = null, $sortDirection = 'asc')
     {
         // Start the query
         $query = MilkDeposit::with('user');
@@ -66,7 +66,11 @@ class UserRepository implements UserRepositoryInterface
         }
 
         // Apply sorting
-        if (!$is_pdf) {
+        if ($sortBy === 'farmer_number') {
+            $query->join('users', 'users.id', '=', 'milk_deposits.user_id')
+                ->orderBy('users.farmer_number', $sortDirection)
+                ->select('milk_deposits.*');
+        } elseif (!$is_pdf) {
             $query->latest();
         }
 

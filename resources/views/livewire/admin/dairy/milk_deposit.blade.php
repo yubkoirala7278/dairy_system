@@ -176,7 +176,14 @@
                 <thead>
                     <tr class="table-secondary">
                         {{-- <th scope="col" style="font-size: 20px; white-space: nowrap;">मिति</th> --}}
-                        <th scope="col" style="font-size: 20px; white-space: nowrap;">कृ.न.</th>
+                        <th scope="col" style="font-size: 20px; white-space: nowrap; cursor: pointer;" wire:click="sort('farmer_number')">
+                            कृ.न.
+                            @if ($sortBy === 'farmer_number')
+                                <i class="fa-solid fa-sort-{{ $sortDirection === 'asc' ? 'up' : 'down' }}"></i>
+                            @else
+                                <i class="fa-solid fa-sort" style="opacity: 0.3;"></i>
+                            @endif
+                        </th>
                         <th scope="col" style="font-size: 20px; white-space: nowrap;">कृषक नाम</th>
                         <th scope="col" style="font-size: 20px; white-space: nowrap;">प्रकार</th>
                         <th scope="col" style="font-size: 20px; white-space: nowrap;">दूध लि.</th>
