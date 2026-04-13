@@ -134,7 +134,7 @@ class UserRepository implements UserRepositoryInterface
     // ==========end of getting total money generated from milk on specific date==========
 
     // ============get total milk deposits reports=================
-    public function getMilkDepositsReports($entries = 10, $search = null, $milk_deposit_date = null)
+    public function getMilkDepositsReports($entries = 10, $search = null, $milk_deposit_date_from = null, $milk_deposit_date_to = null)
     {
         // Start the query
         $query = MilkDeposit::with('user')
@@ -153,9 +153,13 @@ class UserRepository implements UserRepositoryInterface
                     ->orWhere('milk_deposit_time', 'like', "%{$search}%");
             });
         }
-        // Apply filter for milk_deposit_date if provided
-        if ($milk_deposit_date) {
-            $query->where('milk_deposit_date', '=', $milk_deposit_date);
+        // Apply filter for milk_deposit_date range if provided
+        if ($milk_deposit_date_from && $milk_deposit_date_to) {
+            $query->whereBetween('milk_deposit_date', [$milk_deposit_date_from, $milk_deposit_date_to]);
+        } elseif ($milk_deposit_date_from) {
+            $query->where('milk_deposit_date', '>=', $milk_deposit_date_from);
+        } elseif ($milk_deposit_date_to) {
+            $query->where('milk_deposit_date', '<=', $milk_deposit_date_to);
         }
 
         // Apply sorting to get latest first
@@ -187,7 +191,7 @@ class UserRepository implements UserRepositoryInterface
 
 
     // ==========get total money generated from milk ==========
-    public function getTotalIncomeFromMilk($entries = 10, $search = null, $milk_deposit_date = null)
+    public function getTotalIncomeFromMilk($entries = 10, $search = null, $milk_deposit_date_from = null, $milk_deposit_date_to = null)
     {
         // Start the query
         $query = MilkDeposit::query();
@@ -203,9 +207,13 @@ class UserRepository implements UserRepositoryInterface
                     ->orWhere('milk_deposit_time', 'like', "%{$search}%");
             });
         }
-        // Apply filter for milk_deposit_date if provided
-        if ($milk_deposit_date) {
-            $query->where('milk_deposit_date', '=', $milk_deposit_date);
+        // Apply filter for milk_deposit_date range if provided
+        if ($milk_deposit_date_from && $milk_deposit_date_to) {
+            $query->whereBetween('milk_deposit_date', [$milk_deposit_date_from, $milk_deposit_date_to]);
+        } elseif ($milk_deposit_date_from) {
+            $query->where('milk_deposit_date', '>=', $milk_deposit_date_from);
+        } elseif ($milk_deposit_date_to) {
+            $query->where('milk_deposit_date', '<=', $milk_deposit_date_to);
         }
 
 

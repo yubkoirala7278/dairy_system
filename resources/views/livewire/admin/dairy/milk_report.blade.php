@@ -20,8 +20,10 @@
             <div class="d-flex align-items-center" style="column-gap: 20px">
                 <input type="search" class="form-control  translate-nepali" placeholder="खोज्नुहोस्..."
                     aria-controls="withdraw-request-list" wire:model.live.debounce.500ms="search">
-                <input type="text" id="milk_deposit_date" class="form-control " wire:model.live="milk_deposit_date"
-                    placeholder="दूध सङ्कलन मिति">
+                <input type="text" id="milk_deposit_date_from" class="form-control " wire:model.live="milk_deposit_date_from"
+                    placeholder="मिति देखि">
+                <input type="text" id="milk_deposit_date_to" class="form-control " wire:model.live="milk_deposit_date_to"
+                    placeholder="मिति सम्म">
                 <div class="d-flex align-items-center" style="column-gap: 5px">
                     <button type="button" class="btn btn-secondary px-3 radius-30 btn-flex" style="border-radius: 30px;"
                         wire:click="printMilkDepositReport">PDF</button>
@@ -85,16 +87,32 @@
     <div wire:ignore.self>
         <script type="text/javascript">
             $(document).ready(function() {
-                // Initialize the Nepali Date Picker
-                $('#milk_deposit_date').nepaliDatePicker({
+                // Initialize the Nepali Date Pickers
+                $('#milk_deposit_date_from').nepaliDatePicker({
                     onChange: function() {
-                        // Manually trigger Livewire update
-                        var nepaliDate = $('#milk_deposit_date').val();
-                        // Convert to Nepali numerals before sending to Livewire
+                        var nepaliDate = $('#milk_deposit_date_from').val();
                         var nepaliDateInNepaliNumerals = NepaliFunctions.ConvertToUnicode(nepaliDate);
-                        @this.set('milk_deposit_date', nepaliDateInNepaliNumerals);
+                        @this.set('milk_deposit_date_from', nepaliDateInNepaliNumerals);
                     }
                 });
+                $('#milk_deposit_date_to').nepaliDatePicker({
+                    onChange: function() {
+                        var nepaliDate = $('#milk_deposit_date_to').val();
+                        var nepaliDateInNepaliNumerals = NepaliFunctions.ConvertToUnicode(nepaliDate);
+                        @this.set('milk_deposit_date_to', nepaliDateInNepaliNumerals);
+                    }
+                });
+
+                // Set today's Nepali date as default for both fields
+                var today = NepaliFunctions.GetCurrentBsDate();
+                var formattedDate = today.year + '-' + String(today.month).padStart(2, '0') + '-' + String(today.day).padStart(2, '0');
+                var nepaliDateInNepaliNumerals = NepaliFunctions.ConvertToUnicode(formattedDate);
+
+                $('#milk_deposit_date_from').val(formattedDate);
+                @this.set('milk_deposit_date_from', nepaliDateInNepaliNumerals);
+
+                $('#milk_deposit_date_to').val(formattedDate);
+                @this.set('milk_deposit_date_to', nepaliDateInNepaliNumerals);
             });
         </script>
         <script>

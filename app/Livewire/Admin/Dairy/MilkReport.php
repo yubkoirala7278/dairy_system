@@ -17,7 +17,7 @@ class MilkReport extends Component
     public $search = '';
     public $sortField = 'created_at';
     public $sortDirection = 'desc';
-    public $milk_deposit_date, $milk_deposit_time, $milk_type;
+    public $milk_deposit_date_from, $milk_deposit_date_to, $milk_deposit_time, $milk_type;
 
     public function updatedEntries()
     {
@@ -45,8 +45,8 @@ class MilkReport extends Component
     }
     public function render()
     {
-        $milkDeposits = $this->userRepository->getMilkDepositsReports($this->entries, $this->search,$this->milk_deposit_date);
-        $milkInfo = $this->userRepository->getTotalIncomeFromMilk($this->entries, $this->search,$this->milk_deposit_date);
+        $milkDeposits = $this->userRepository->getMilkDepositsReports($this->entries, $this->search, $this->milk_deposit_date_from, $this->milk_deposit_date_to);
+        $milkInfo = $this->userRepository->getTotalIncomeFromMilk($this->entries, $this->search, $this->milk_deposit_date_from, $this->milk_deposit_date_to);
         $totalDepositIncome = NumberHelper::toNepaliNumber($milkInfo['totalDepositIncome']);
         $totalDepositedMilk = NumberHelper::toNepaliNumber($milkInfo['totalDepositedMilk']);
         return view('livewire.admin.dairy.milk-report', [
@@ -60,7 +60,8 @@ class MilkReport extends Component
     public function printMilkDepositReport()
     {
         $url = route('admin.milk.report.print', [
-            'milk_deposit_date' => $this->milk_deposit_date?$this->milk_deposit_date:'no-date',
+            'milk_deposit_date_from' => $this->milk_deposit_date_from ? $this->milk_deposit_date_from : 'no-date',
+            'milk_deposit_date_to' => $this->milk_deposit_date_to ? $this->milk_deposit_date_to : 'no-date',
             'search' => $this->search ?? null,
         ]);
         $this->dispatch('open-new-tab', url: $url);
