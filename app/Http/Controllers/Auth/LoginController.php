@@ -52,8 +52,15 @@ class LoginController extends Controller
 
         // Attempt login with farmer_number and password
         if (Auth::attempt(['farmer_number' => $request->farmer_number, 'password' => $request->password], $request->remember)) {
+            $user = Auth::user();
+
+            if ($user->hasRole('farmer')) {
+                Auth::logout();
+                return redirect()->back()->with('error', 'किसान भूमिकाको लागि लगइन अनुमति छैन।');
+            }
+
             // Redirect based on role after successful login
-            return $this->authenticated($request, Auth::user());
+            return $this->authenticated($request, $user);
         }
 
         // If login fails, redirect back with error

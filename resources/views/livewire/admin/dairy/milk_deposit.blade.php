@@ -51,7 +51,7 @@
                     <div class="form-group">
                         <label for="milkQuantity" class="form-label h4 font-weight-bold">दुध (लि.)</label>
                         <input type="number" class="form-control" id="milkQuantity" wire:model.live="milkQuantity"
-                            placeholder="दुधको मात्रा लेख्नुहोस्">
+                            placeholder="दुधको मात्रा लेख्नुहोस्" min="0" step="any">
                         @if ($errors->has('milkQuantity'))
                             <span style="color: #ff8591 !important">{{ $errors->first('milkQuantity') }}</span>
                         @endif
@@ -59,7 +59,7 @@
                     <div class="form-group">
                         <label for="milk_fat" class="form-label h4 font-weight-bold">फ्याट</label>
                         <input type="number" class="form-control" id="milk_fat" wire:model.live="milk_fat"
-                            placeholder="दुधको फ्याट लेख्नुहोस्">
+                            placeholder="दुधको फ्याट लेख्नुहोस्" min="0" step="any">
                         @if ($errors->has('milk_fat'))
                             <span style="color: #ff8591 !important">{{ $errors->first('milk_fat') }}</span>
                         @endif
@@ -67,7 +67,7 @@
                     <div class="form-group">
                         <label for="milk_snf" class="form-label h4 font-weight-bold">एस.एन.एफ</label>
                         <input type="number" class="form-control " id="milk_snf" wire:model.live="milk_snf"
-                            placeholder="दुधको एस.एन.एफ लेख्नुहोस्">
+                            placeholder="दुधको एस.एन.एफ लेख्नुहोस्" min="0" step="any">
                         @if ($errors->has('milk_snf'))
                             <span style="color: #ff8591 !important">{{ $errors->first('milk_snf') }}</span>
                         @endif
@@ -108,7 +108,7 @@
                         <label for="per_litre_commission" class="form-label h4 font-weight-bold">प्र.लि.
                             कमिशन</label>
                         <input type="number" class="form-control" id="per_litre_commission"
-                            wire:model.live="per_litre_commission">
+                            wire:model.live="per_litre_commission" min="0" step="any">
                         @error('per_litre_commission')
                             <span style="color: #ff8591 !important">{{ $message }}</span>
                         @enderror

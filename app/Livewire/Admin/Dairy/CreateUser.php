@@ -5,6 +5,7 @@ namespace App\Livewire\Admin\Dairy;
 use App\Exports\UsersExport;
 use App\Models\User;
 use App\Repositories\Interfaces\UserRepositoryInterface;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use Livewire\WithPagination;
@@ -146,18 +147,20 @@ class CreateUser extends Component
         $this->validate();
 
         try {
-            $user = User::create([
-                'name' => $this->name,
-                'owner_name' => $this->name,
-                'password' => 'password',
-                'farmer_number' =>  $this->convertToNepali($this->farmer_number),
-                'location' => $this->location,
-                'gender' => $this->gender,
-                'phone_number' => $this->phone_number,
-                'pan_number' => $this->convertToNepali($this->pan_number),
-                'vat_number' => $this->convertToNepali($this->vat_number),
-            ]);
-            $user->assignRole('farmer');
+            DB::transaction(function () {
+                $user = User::create([
+                    'name' => $this->name,
+                    'owner_name' => $this->name,
+                    'password' => 'password',
+                    'farmer_number' =>  $this->convertToNepali($this->farmer_number),
+                    'location' => $this->location,
+                    'gender' => $this->gender,
+                    'phone_number' => $this->phone_number,
+                    'pan_number' => $this->convertToNepali($this->pan_number),
+                    'vat_number' => $this->convertToNepali($this->vat_number),
+                ]);
+                $user->assignRole('farmer');
+            });
             $this->resetFields();
             $this->dispatch('success', title: 'डाटा सुरक्षित भएको छ।');
         } catch (\Throwable $th) {

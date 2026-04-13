@@ -79,8 +79,8 @@ class MilkDeposit extends Component
     }
     public function milkPriceUpdation()
     {
-        $this->per_litre_price = round(((float)$this->milk_snf * $this->gov_snf) + ((float)$this->milk_fat * $this->gov_fat), 4) + (float)$this->per_litre_commission;
-        $this->total_milk_price = round((float)$this->milkQuantity * $this->per_litre_price, 4);
+        $this->per_litre_price = round(((float)$this->milk_snf * (float)$this->gov_snf) + ((float)$this->milk_fat * (float)$this->gov_fat), 4) + (float)$this->per_litre_commission;
+        $this->total_milk_price = round((float)$this->milkQuantity * (float)$this->per_litre_price, 4);
     }
     public function updatedMilkFat()
     {
@@ -106,7 +106,7 @@ class MilkDeposit extends Component
         $this->phone_number = $user->phone_number;
         $this->milk_fat = $user->milk_fat ?? 0;
         $this->milk_snf = $user->milk_snf ?? 0;
-        $this->per_litre_price = round(($this->milk_snf * $this->gov_snf) + ($this->milk_fat * $this->gov_fat), 4);
+        $this->per_litre_price = round(((float)$this->milk_snf * (float)$this->gov_snf) + ((float)$this->milk_fat * (float)$this->gov_fat), 4);
     }
     public function updatedMilkQuantity()
     {
@@ -127,11 +127,11 @@ class MilkDeposit extends Component
 
     protected $rules = [
         'farmernumber' => 'required',
-        'milkQuantity' => 'required',
-        'milk_fat' => 'required|min:1|numeric',
-        'milk_snf' => 'required|min:1|numeric',
-        'per_litre_commission' => 'nullable|numeric',
-        'per_litre_price' => 'required|numeric',
+        'milkQuantity' => 'required|numeric|min:0',
+        'milk_fat' => 'required|numeric|min:0',
+        'milk_snf' => 'required|numeric|min:0',
+        'per_litre_commission' => 'nullable|numeric|min:0',
+        'per_litre_price' => 'required|numeric|min:0',
         'milk_deposit_date' => 'required'
     ];
 
@@ -184,7 +184,7 @@ class MilkDeposit extends Component
                 'milk_snf' => $this->milk_snf,
                 'milk_price_per_ltr' => $this->per_litre_price,
                 'per_ltr_commission' => $this->per_litre_commission,
-                'milk_per_ltr_price_with_commission' => $this->per_litre_price + $this->per_litre_commission,
+                'milk_per_ltr_price_with_commission' => (float)$this->per_litre_price + (float)$this->per_litre_commission,
                 'milk_total_price' => $this->total_milk_price,
                 'milk_deposit_date' => $this->milk_deposit_date,
                 'milk_deposit_time' => $this->milk_deposit_time,
@@ -256,7 +256,7 @@ class MilkDeposit extends Component
                 'milk_snf' => $this->milk_snf,
                 'milk_price_per_ltr' => $this->per_litre_price,
                 'per_ltr_commission' => $this->per_litre_commission,
-                'milk_per_ltr_price_with_commission' => $this->per_litre_price + $this->per_litre_commission,
+                'milk_per_ltr_price_with_commission' => (float)$this->per_litre_price + (float)$this->per_litre_commission,
                 'milk_total_price' => $this->total_milk_price,
                 'milk_deposit_date' => $this->milk_deposit_date,
                 'milk_deposit_time' => $this->milk_deposit_time,
