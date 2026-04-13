@@ -156,7 +156,7 @@ class MilkDeposit extends Component
     {
         $this->validate();
         $user = User::where('farmer_number', $this->farmernumber)->first();
-        if (!$user) {
+        if (!$user || !$user->hasRole('farmer')) {
             $this->dispatch('warningMessage', title: "कृषक नम्बर {$this->farmernumber} दर्ता भएको छैन।");
             $this->resetFields();
             return;

@@ -255,6 +255,13 @@
                         @this.set('milk_deposit_date', nepaliDateInNepaliNumerals);
                     }
                 });
+
+                // Set today's Nepali date as default
+                var today = NepaliFunctions.GetCurrentBsDate();
+                var formattedDate = today.year + '-' + String(today.month).padStart(2, '0') + '-' + String(today.day).padStart(2, '0');
+                $('#milk_deposit_date').val(formattedDate);
+                var nepaliDateInNepaliNumerals = NepaliFunctions.ConvertToUnicode(formattedDate);
+                @this.set('milk_deposit_date', nepaliDateInNepaliNumerals);
             });
         </script>
         <script>
